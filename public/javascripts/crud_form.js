@@ -1,6 +1,5 @@
 
 let payLoad = document.querySelector('#payload');
-//let baseURL = 'http://localhost:3000/embassy/information';
 let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
 
 
@@ -8,6 +7,8 @@ let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
 function copytodb(e) {
 e.preventDefault();  
   let Myobject;
+  console.log(event.target.className.toLowerCase());
+  console.log(event.target.id);
   if (event.target.className.toLowerCase() === 'add') {
   let e_id = event.target.id;
     let id = e_id.split("_")[1];
@@ -15,7 +16,7 @@ e.preventDefault();
   var result=axios.get(string)
     .then(function(res) {
       let d = res.data.data;
-    axios.patch('/gov', {
+    axios.put('/gov', {
     "id": d.id,
     "ss" : d.ss,
     "first": d.first,
@@ -30,11 +31,12 @@ e.preventDefault();
     "image": d.image
       })
      .then(function(res){
-           if(res.data.status=='fail') {
-            alert('nonono')
-           }
+           if(res.data.status=='failed') 
+            alert('record id:'+d.id+' already exist')
+           else
+            alert('record id:'+d.id+'was inserted successfully')
      })
-     console.log('222', res)
+     // console.log('222', res)
    })
     .catch(function(err) {
       return(err)
@@ -48,13 +50,89 @@ e.preventDefault();
 
 
 function readAllItems(e) {
-  e.preventDefault();
+  //e.preventDefault();
   axios.get(govdb)
    .then(function(res){
     console.log(res.data.data.length);
       console.log(res.data.data);
       payLoad.innerHTML = "";
       res.data.data.forEach(function(d, c) {
+        fillTable(d);
+      })
+    })
+    .catch(function(err) {
+      console.log(err)
+    })
+}
+
+
+function viewperson(e) {
+  e.preventDefault();  
+  let Myobject;
+  if (event.target.className.toLowerCase() === 'view') {
+  console.log(govdb);
+  let e_id = event.target.id;
+  console.log(e_id);
+    let id = e_id.split("_")[1];
+  let string=govdb+"/"+id;
+  axios.get(string)
+    .then(function(res) {
+      let d = res.data.data;
+      console.log(d);
+       $('.modal-header').html(`<button type="button" class="close" data-dismiss="modal">&times;</button></div>`);
+      if(d.wanted==true){
+            $('.modal-header').append(`<div class="alert alert-danger alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Danger!</strong> This Person is <strong>Wanted !!!!</strong> follow Protocol.355 immediately</div>`)}
+
+          $('.modal-header').append(`<h2>Name: ${d.first} ${d.last}</h2></div>`)
+            
+          $('.modal-body').html(`
+          <div><img class="photoid" id=image_${d.ss} src="${d.image}" alt="photoid" height="200" width="auto"> </div>
+          <div id=item_${d.ss}><h4>ID:</h4> ${d.id}</div>
+          <div id=ss_${d.ss}><h4>S.S:</h4> ${d.ss}</div> 
+          <div id=gender_${d.ss}><h4>Gender:</h4> ${d.gender}</div>
+          <div id=species_${d.ss}><h4>Species:</h4> ${d.species}</div> 
+          <div id=height_${d.ss}><h4>height:</h4> ${d.height}</div>
+          <div id=color_${d.ss}><h4>Hair Color:</h4> ${d.color}</div>
+          <div id=occupation_${d.ss}><h4>Occupation:</h4> ${d.occupation}</div> 
+          <div id=wanted_${d.ss}><h4>Wanted?</h4> ${d.wanted}</div>
+          <div id=city${d.ss}><h4>Address:</h4> ${d.city}</div>`)
+           $('.add').attr('id',`add_${d.ss}`); 
+    })
+    .catch(function(err) {
+      console.log(err)
+    })
+}
+}
+
+$('#displayone').on('change',function(e) {
+  let val = $(this).val();
+   console.log(val);
+  let string=govdb+"/"+val;
+  axios.get(string)
+   .then(function(res){
+    console.log(res.data.data.length);
+      console.log(res.data.data);
+      let d=res.data.data;
+      payLoad.innerHTML = "";
+      fillTable(d);
+      payLoad.innerHTML += `<button type="button"  onClick="window.onload()">◀︎ Back</button>`
+      $('#displayone').val(" ");
+    })
+    .catch(function(err) {
+       payLoad.innerHTML = "";
+       payLoad.innerHTML += `person with Social security #${val} is NOT FOUND<br>
+       <button type="button"  onClick="window.onload()">◀︎ Back</button>`;
+       $('#displayone').val(" ");
+      console.log(err)
+      return err;
+    })
+  
+})
+
+function fillTable(d)
+{
         payLoad.innerHTML += 
         `<tr id=itemid_${d.ss}>
           <td id=item_${d.ss}>${d.id}</td> 
@@ -73,83 +151,16 @@ function readAllItems(e) {
             <button type="button" id=add_${d.ss} class="add">➕</button>
           </td>
         </tr>`
-      })
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
-}
-// <td id=image_${d.id} >${d.image}</td>  
-// function readItem(e) {
-//   e.preventDefault();
-//   console.log('read one item');
-//   console.log(baseURL);
-//   let e_id = event.target.id;
-//     let id = e_id.split("_")[1];
-//   let string=baseURL+"/"+id;
-//   axios.get(string)
-//     .then(function(res) {
-//       datajob=res.data.data;
-//       console.log(dataobj);
-//       })
-//     .catch(function(err) {
-//       console.log(err)
-//     })
-// }
-
-function viewperson(e) {
-  e.preventDefault();  
-  let Myobject;
-  if (event.target.className.toLowerCase() === 'view') {
-  console.log(govdb);
-  let e_id = event.target.id;
-  console.log(e_id);
-    let id = e_id.split("_")[1];
-  let string=govdb+"/"+id;
-  axios.get(string)
-    .then(function(res) {
-      let d = res.data.data;
-      console.log(d);
-          $('.modal-header').html(`<div class="modal-header">
-          <div id=title{d.ss}><h2>Name: ${d.first} ${d.last}</h2></div>
-          <button type="button" class="close" data-dismiss="modal">&times;</button></div>`)
-            $('.modal-body').html(`
-          <div><img class="photoid" id=image_${d.ss} src="${d.image}" alt="photoid" height="200" width="200"> </div>
-          <div id=item_${d.ss}><h4>ID:</h4> ${d.id}</div>
-          <div id=ss_${d.ss}><h4>S.S:</h4> ${d.ss}</div> 
-          <div id=gender_${d.ss}><h4>Gender:</h4> ${d.gender}</div>
-          <div id=species_${d.ss}><h4>Species:</h4> ${d.species}</div> 
-          <div id=height_${d.ss}><h4>height:</h4> ${d.height}</div>
-          <div id=color_${d.ss}><h4>Hair Color:</h4> ${d.color}</div>
-          <div id=occupation_${d.ss}><h4>Occupation:</h4> ${d.occupation}</div> 
-          <div id=wanted_${d.ss}><h4>Wanted?</h4> ${d.wanted}</div>
-          <div id=city${d.ss}><h4>Address:</h4> ${d.city}</div>`)
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
-}
 }
 
-// function deleteItem(e) {
-//   e.preventDefault();
-//   if (event.target.className.toLowerCase() === 'delete') {
-//     console.log(event.target.id);
-//     let e_id = event.target.id;
-//     let id = e_id.split("_")[1];
-//     console.log(id);
-//     if(confirm(`Are you sure you want to delete item with the ID ${id}`)){
-//   let string=baseURL+"/"+id;
-//     console.log(string);
-//     axios.delete(string).then(function(res) {
-//     window.alert(`meal with ID ${id} was deleted successfully`);
-//     readAllItems(e);
-//   })
-// .catch(function(err) {
-//       console.log(err)
-//     })}
-// }
-// }
+// $('.delete').on('click', function() {
+//   console.log('here in delete')
+//   let id = $(this).parent().attr('data-id')
+//   axios.delete("http://localhost:3000/"+id)
+//   $(this).parent().remove();
+// })
+
+
 
 //register event listeners
 // document.getElementById('create_btn').addEventListener('click', createItem);
@@ -167,8 +178,12 @@ document.querySelectorAll('#payload')
   .forEach(function(c) {
     c.addEventListener('click', viewperson)
   })
-document.querySelectorAll('#payload')
-  .forEach(function(c) {
-    c.addEventListener('click', copytodb)
-  })
+
+//   $( ".add" ).click(function() {
+//   addEventListener('click', copytodb)
+// });
+
+  $(document).on('click', '.add', function(event) {
+    addEventListener('click', copytodb)
+    })
 
