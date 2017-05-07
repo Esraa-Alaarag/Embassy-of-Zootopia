@@ -3,7 +3,7 @@ var options = { promiseLib: promise };
 
 var pgp = require('pg-promise')(options)
 
-var connectionString = 'postgres://localhost:5432/embassy';
+var connectionString = process.env.DATABASE_URL;
 var db = pgp(connectionString);
 
 
@@ -70,7 +70,7 @@ function getAllContacts(req, res, next){
     console.log('error');// print error;
     res.json({
       status:'failed',
-      message:'already exist'
+      message:'unable to load your database'
     })
 
     return false;
