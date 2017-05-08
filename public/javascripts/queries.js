@@ -81,8 +81,13 @@ function getpassstatus(req, res, next){
   let contactss = parseInt(req.params.ss)
   db.one('select first, last ,status , startdate , finishdate from information where ss= $1',contactss )
     .then(function(data) {
-     res.json(data);
-    console.log('Getting user`s passport information was sucessful');
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'One citizen information Retrieved'
+            console.log('Getting user`s passport information was sucessful');
+    });
     })
     .catch(error => {
     console.log('error');// print error;
