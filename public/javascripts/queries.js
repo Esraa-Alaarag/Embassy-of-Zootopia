@@ -79,7 +79,7 @@ function getAllContacts(req, res, next){
 
 function getpassstatus(req, res, next){
   let contactss = parseInt(req.params.ss)
-  db.one('select status , startdate , finishdate from information where ss= $1',contactss )
+  db.one('select first, last ,status , startdate , finishdate from information where ss= $1',contactss )
     .then(function(data) {
      res.json(data);
     console.log('Getting user`s passport information was sucessful');

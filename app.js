@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 var sassMiddleware = require('node-sass-middleware');
  
 
@@ -14,6 +15,7 @@ var gov = require('./routes/gov');
 var embassy = require('./routes/embassy');
 var userdb = require('./routes/userdb');
 var app = express();
+app.use(cors()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
