@@ -86,7 +86,6 @@ function getpassstatus(req, res, next){
           status: 'success',
           data: data,
           message: 'One citizen information Retrieved'
-            console.log('Getting user`s passport information was sucessful');
     });
     })
     .catch(error => {
