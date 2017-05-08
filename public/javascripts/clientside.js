@@ -1,8 +1,7 @@
 
 let payLoad = document.querySelector('#payload');
-let baseURL = 'https://localhost:3000/embassy';
+let baseURL = '//localhost:3000/embassy';
 // let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
-
 
 
 
