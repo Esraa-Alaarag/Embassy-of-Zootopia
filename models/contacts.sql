@@ -1,3 +1,4 @@
+-- this the seed file for the local Embassy database
 DROP DATABASE IF EXISTS contacts_db1;
 CREATE DATABASE contacts_db1;
 

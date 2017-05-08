@@ -1,17 +1,20 @@
-
+// selecting the where I wan to display my information
 let payLoad = document.querySelector('#payload');
+// this line was modified for the secuirty issue 
+// it was before baseURL = ‘//localhost:3000/embassy’; then I had mix contecnt http https problem
 let baseURL = '//young-badlands-16070.herokuapp.com/embassy/';
 // let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
 
 
-
+// this function delete a record by calling axios delete
 function deleteItem(e) {
   if (event.target.className.toLowerCase() === 'delete') {
+    // every id was seperated by _ss# so I can catch it later
     let e_ss = event.target.id;
     let ss = e_ss.split("_")[1];
     console.log(ss);
     if(confirm(`Are you sure you want to delete person with the Social security number of ${ss}`)){
-  let string=baseURL+"/"+ss;
+    let string=baseURL+"/"+ss;
     console.log(string);
     axios.delete(string).then(function(res) {
     window.alert(`person with ss ${ss} was deleted successfully`);
@@ -23,7 +26,7 @@ function deleteItem(e) {
 }
 }
 
-
+// this function call get to render every thing inside html partial display page directly
 function readAllItems(e) {
   //e.preventDefault();
   console.log("here I'm getting")
@@ -39,6 +42,9 @@ function readAllItems(e) {
       console.log(err)
     })
 }
+
+
+
 $('.input_date').on('focusout',function() {
   console.log("Editing");
   let id = $(this).attr('id').split("_")

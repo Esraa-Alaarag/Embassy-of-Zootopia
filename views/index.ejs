@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <% include ./partials/head %>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body id= 'index'>
+   <% include ./partials/banner %>
+    
 
     <div class="container">
-    <a href= '/gov' class="btn  btn-success btn-block btn-lg">Zootopia Database</a>
-    <a href= '/embassy' class="btn  btn-success btn-block btn-lg">Embassy of Zootopia Data base</a>
+    <center>
+    <a href= '/gov' class="btn  btn-success  btn-lg">Zootopia Goverment Database</a>
+    <a href= '/embassy' class="btn  btn-success btn-lg">Embassy of Zootopia Database</a></center>
     </div>
   </body>
 </html>

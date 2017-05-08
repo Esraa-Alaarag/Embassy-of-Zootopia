@@ -5,7 +5,7 @@ var db = require('../public/javascripts/queries')
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('gov', { title: 'gov' }); 
+  res.render('gov', { title: 'Zootopia Government DataBase' }); 
 });
 
 router.put('/', db.Addtodb);

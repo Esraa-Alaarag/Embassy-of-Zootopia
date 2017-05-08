@@ -62,7 +62,7 @@ function getAllContacts(req, res, next){
   db.any('select * from information order by ss')
   .then(function(data){
     console.log(data);
-    res.render( 'embassy', { title:"my embassy", data:data })
+    res.render( 'embassy', { title:"Embassy of Zootopia Database", data:data })
     res.status(200)
     console.log('getting all the data was sucessful')
     })

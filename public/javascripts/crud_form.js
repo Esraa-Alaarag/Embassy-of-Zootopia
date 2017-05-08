@@ -117,13 +117,13 @@ $('#displayone').on('change',function(e) {
       let d=res.data.data;
       payLoad.innerHTML = "";
       fillTable(d);
-      payLoad.innerHTML += `<button type="button"  onClick="window.onload()">◀︎ Back</button>`
+      payLoad.innerHTML += `<button type="button"  onClick="window.onload()">◀︎ Back to the Datbase</button>`
       $('#displayone').val(" ");
     })
     .catch(function(err) {
        payLoad.innerHTML = "";
        payLoad.innerHTML += `person with Social security #${val} is NOT FOUND<br>
-       <button type="button"  onClick="window.onload()">◀︎ Back</button>`;
+       <button type="button"  onClick="window.onload()">◀︎ Back to the Datbase</button>`;
        $('#displayone').val(" ");
       console.log(err)
       return err;
@@ -153,24 +153,11 @@ function fillTable(d)
         </tr>`
 }
 
-// $('.delete').on('click', function() {
-//   console.log('here in delete')
-//   let id = $(this).parent().attr('data-id')
-//   axios.delete("http://localhost:3000/"+id)
-//   $(this).parent().remove();
-// })
 
 
 
-//register event listeners
-// document.getElementById('create_btn').addEventListener('click', createItem);
+
 document.getElementById('readall_btn').addEventListener('click', readAllItems);
-//document.getElementById('read_btn').addEventListener('click', readItem);
-// document.getElementById('update_btn').addEventListener('click', updateItem);
- //$('.update').on('click',updateItem);
-// $('.delete').on('click',deleteItem);
-
-
 
 
 window.onload=readAllItems;
@@ -178,10 +165,6 @@ document.querySelectorAll('#payload')
   .forEach(function(c) {
     c.addEventListener('click', viewperson)
   })
-
-//   $( ".add" ).click(function() {
-//   addEventListener('click', copytodb)
-// });
 
   $(document).on('click', '.add', function(event) {
     addEventListener('click', copytodb)
