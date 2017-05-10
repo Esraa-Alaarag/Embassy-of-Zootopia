@@ -5,10 +5,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// this is package is used to solve cross origin problem
 var cors = require('cors');
 var sassMiddleware = require('node-sass-middleware');
  
-
+// app routes 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var gov = require('./routes/gov');

@@ -1,17 +1,14 @@
-
-let payLoad = document.querySelector('#payload');
+// this file get displayed in userdb.ejs and works as API for the applicant webpage
+// get the data from the your local database
 let baseURL = '//localhost:3000/userdb';
-// let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
 
 
 function readAllItems(e) {
-  //e.preventDefault();
-  console.log("here I'm getting")
-  axios.get(baseURL)
-   .then(function(res){
-    
-    })
-    .catch(function(err) {
-      console.log(err)
+	axios.get(baseURL)
+  	.then(function(res){
+    	console.log(res)
+ 	})
+    .catch(function(err){
+    	console.log(err)
     })
 }

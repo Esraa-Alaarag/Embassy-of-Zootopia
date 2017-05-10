@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <% include ./partials/head %>
-  <body>
-   <% include ./partials/banner %>
-    <h1 id="title"><%= title %></h1>
-    
-    
-
-
-     
- 
-   <% include ./partials/display %>
-   </table>
-      <% include ./partials/scripts %>
-          <script src="javascripts/clientside.js"></script>
+<% include ./partials/head %>
+<body>
+	<!-- adding the banner -->
+	<% include ./partials/banner %>
+	<h1 id="title"><%= title %></h1>
+	<!-- adding the display from partials -->
+  	<% include ./partials/display %>
+	<!-- adding the scripts -->
+    <% include ./partials/scripts %>
+	<!-- adding tha axios calls -->
+    <script src="javascripts/clientside.js"></script>
   </body>
 </html>

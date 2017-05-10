@@ -1,62 +1,66 @@
-
+// this file work and display in  gov.ejs
 let payLoad = document.querySelector('#payload');
+// I have to use this source to solve mix contect http/https problem
 let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
 
 
-
+// this function copy the applicants information from the API to the embassy local database
 function copytodb(e) {
-e.preventDefault();  
+  e.preventDefault();  
   let Myobject;
   console.log(event.target.className.toLowerCase());
   console.log(event.target.id);
   if (event.target.className.toLowerCase() === 'add') {
-  let e_id = event.target.id;
+    let e_id = event.target.id;
     let id = e_id.split("_")[1];
-  let string=govdb+"/"+id;
-  var result=axios.get(string)
+    let string=govdb+"/"+id;
+    var result=axios.get(string)
+    // after finishing the first axios call of get the info of the person store it in your local database
     .then(function(res) {
       let d = res.data.data;
-    axios.put('/gov', {
-    "id": d.id,
-    "ss" : d.ss,
-    "first": d.first,
-    "last": d.last,
-    "gender": d.gender,
-    "species": d.species,
-    "height": d.height,
-    "color": d.color,
-    "occupation": d.occupation,
-    "wanted": d.wanted,
-    "city": d.city,
-    "image": d.image
+      axios.put('/gov', {
+        "id": d.id,
+        "ss" : d.ss,
+        "first": d.first,
+        "last": d.last,
+        "gender": d.gender,
+        "species": d.species,
+        "height": d.height,
+        "color": d.color,
+        "occupation": d.occupation,
+        "wanted": d.wanted,
+        "city": d.city,
+        "image": d.image
       })
-     .then(function(res){
-           if(res.data.status=='failed') 
-            alert('record id:'+d.id+' already exist')
-           else
-            alert('record id:'+d.id+'was inserted successfully')
-     })
-     // console.log('222', res)
-   })
+      // coming back from the put axios call
+      .then(function(res){
+        if(res.data.status=='failed') 
+          alert('record id:'+d.id+' already exist')
+        else
+          alert('record id:'+d.id+'was inserted successfully')
+      })
+      // catching the put call error
+      .catch(function(err) {
+        return(err)
+      })
+    })
+    // catching the get call error
     .catch(function(err) {
       return(err)
     })
-    .catch(function(err) {
-      return(err)
-    })
-}
+  }
 }  
 
 
-
+// this function display all the the information in the goverment database table
 function readAllItems(e) {
   //e.preventDefault();
   axios.get(govdb)
-   .then(function(res){
+  .then(function(res){
     console.log(res.data.data.length);
-      console.log(res.data.data);
-      payLoad.innerHTML = "";
-      res.data.data.forEach(function(d, c) {
+    console.log(res.data.data);
+    payLoad.innerHTML = "";
+    res.data.data.forEach(function(d, c) {
         fillTable(d);
       })
     })

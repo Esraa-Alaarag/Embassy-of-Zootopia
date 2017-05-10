@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 var db = require('../public/javascripts/queries')
 
-/* GET home page. */
+/* GET government database page. */
 
 router.get('/', function(req, res, next) {
   res.render('gov', { title: 'Zootopia Government DataBase' }); 
 });
 
+// add a record to the embassy database
 router.put('/', db.Addtodb);
-/* GET home page. */
 
 
 

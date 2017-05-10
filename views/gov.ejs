@@ -2,12 +2,10 @@
 <html>
   <% include ./partials/head %>
   <body>
-   <% include ./partials/banner %>
+    <% include ./partials/banner %>
     <h1><%= title %></h1>
-  
-   <input type="number" id="displayone"  placeholder="Social security number.." title="Type in a Social security number">
-  </form>
-
+    <input type="number" id="displayone"  placeholder="Social security number.." title="Type in a Social security number">
+    <!-- applicant table -->
     <button id="readall_btn" class="btn btn-lg" type="button" class="btn">read all</button>          
     <table class="table table-hover table-striped">
       <thead>
@@ -26,7 +24,7 @@
         </tr>
       </thead>
       <tbody id="payload">
-
+      <!-- this part where all the information will be displayed in a table  -->
       </tbody>
     
     </table>
@@ -36,37 +34,30 @@
       <button type="button" class="btn">1</button>
       <button type="button" class="btn">▶︎</button>
     </div>   -->
-  </div>
 
 	  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Form  -->
-        <form action="#" method="post" class="person">
-          <div class="modal-body">
-            <h4 class="modal-title">here is one person</h4>
-            
-
-            </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="  modal">&times;</button>
           </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="add" >Copy to database</button>
-            <button type="button" class="btn btn-md" data-dismiss="modal">Cancel</button>
-          </div>  
-        </form>
+          <!-- Form  -->
+          <form action="#" method="post" class="person">
+            <div class="modal-body">
+              <h4 class="modal-title">here is one person</h4>
+              <!-- the part will be filled by an citizen information -->
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="  add" >Copy to database</button>
+              <button type="button" class="btn btn-md"  data-dismiss="modal">Cancel</button>
+            </div>  
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-
-
-
-    </div>
-    <% include ./partials/scripts %>
-    <script src="javascripts/crud_form.js"></script>
+  <% include ./partials/scripts %>
+  <script src="javascripts/crud_form.js"></script>
   </body>
 </html>

@@ -1,11 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../public/javascripts/queries')
-/* GET home page. */
 
-// SWAPI ROUTES
-// router.patch('/swapi', db.swapiAdd)
-// /* GET home page. */
+
+// get the applicant API
 router.get('/:ss', db.getpassstatus); 
 
 
