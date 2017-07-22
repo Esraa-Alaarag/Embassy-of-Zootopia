@@ -7,9 +7,10 @@ let govdb = 'https://zootopia-api.herokuapp.com/api/information';
 function copytodb(e) {
   e.preventDefault();  
   let Myobject;
-  console.log(event.target.className.toLowerCase());
+  let classname= event.target.className.toLowerCase();
   console.log(event.target.id);
-  if (event.target.className.toLowerCase() === 'add') {
+  if (classname.trim() === 'add') {
+    console.log("==>here");
     let e_id = event.target.id;
     let id = e_id.split("_")[1];
     let string=govdb+"/"+id;
@@ -120,13 +121,13 @@ $('#displayone').on('change',function(e) {
       let d=res.data.data;
       payLoad.innerHTML = "";
       fillTable(d);
-      payLoad.innerHTML += `<button type="button"  onClick="window.onload()">◀︎ Back to the Datbase</button>`
+      payLoad.innerHTML += `<button type="button"  onClick="window.onload()">◀︎ Back to the Database</button>`
       $('#displayone').val(" ");
     })
     .catch(function(err) {
        payLoad.innerHTML = "";
        payLoad.innerHTML += `person with Social security #${val} is NOT FOUND<br>
-       <button type="button"  onClick="window.onload()">◀︎ Back to the Datbase</button>`;
+       <button type="button"  onClick="window.onload()">◀︎ Back to the Database</button>`;
        $('#displayone').val(" ");
       console.log(err)
       return err;
@@ -150,7 +151,7 @@ function fillTable(d)
           <td id=wanted_${d.ss} >${d.wanted}</td>
           <td id=address_${d.ss} >${d.city}</td>  
           <td>    
-            <button type="button" id=view_${d.ss} data-toggle="modal" data-target="#myModal" class="view">🔍</button>
+            <button type="button" id=view_${d.ss} data-toggle="modal"  data-target="#myModal" class="view">🔍</button>
             <button type="button" id=add_${d.ss} class="add">➕</button>
           </td>
         </tr>`
