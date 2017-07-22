@@ -5,7 +5,7 @@ var db = require('../public/javascripts/queries')
 /* GET government database page. */
 
 router.get('/', function(req, res, next) {
-  res.render('gov', { title: 'Zootopia Government DataBase' }); 
+  res.render('gov', { title: 'Zootopia Government Database' }); 
 });
 
 // add a record to the embassy database
