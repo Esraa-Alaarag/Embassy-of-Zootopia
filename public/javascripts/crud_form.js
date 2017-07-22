@@ -1,8 +1,7 @@
 // this file work and display in  gov.ejs
 let payLoad = document.querySelector('#payload');
 // I have to use this source to solve mix contect http/https problem
-let govdb = 'https://nameless-hollows-47144.herokuapp.com/api/information';
-
+let govdb = 'https://zootopia-api.herokuapp.com/api/information';
 
 // this function copy the applicants information from the API to the embassy local database
 function copytodb(e) {
