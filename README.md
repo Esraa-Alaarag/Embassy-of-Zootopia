@@ -1,109 +1,136 @@
-Embassy Passport Tracking System
------------------------
-My app is a passport tracking application for any Embassy . The embassies usually can pull the information of the people who wants to renew their passport  from their country Database then after adding the required information the can add the embassy releated information. the applicants using their Social secuirty number will be able to check the status of their application. 
+<a name="goback">
 
-Wireframes
-----------
+# Zootopia Embassy APP
+## Live:[Zootopia embassy APP](https://embassy-of-zootopia.herokuapp.com/)
 
-Landing page
+![app-logo](./img/logo.png)
 
-![](home.png)
+</a> 
 
-Goverment Database
+### Esraa Alaarag 
 
-![](govdb.png)
+## Table of Contents
 
-When the user click on the mignifier he should see 
-
-![](veiw.png)
-
-Embassy Database
-
-![](embasydb.png)
-
-Applicant interface
-
-![](USER.PNG)
+1. [App description](#appdescription)
+2. [User Stories](#userstories)
+3. [Wireframes](#wireframesweb)
+4. [Visual representation of the database](#database)
+5. [Pseudocode](#pseudocode)
+8. [Technologies used](#technologies)
+9. [Live deployment](#project)
 
 
-User Stories
-------------
-* As an embassy staff, I want to be able to look in to the government database to see what information do they have about certain applicant
-* As an embassy staff, I want to be able to import specific user/s information from the system
-* As an embassy staff I want to be able to add date of application received, date it finishes and add telephone number. or to delete the applicant info
-* As an embassy staff I want to change the passport issue process status.
-* As embassy staff I want to know if the person who wants to renew his passport is wanted.
+<a name="appdescription">
 
-Pseudocode
-----------
-####part 1 : creating API
-This part will create the API that will feed the embassy with applicants information.
+## APP DESCRIPTION:
 
-*  Create tables and relations within the table.
-*  create  seed file  and create the filled database
-*	Create gov api with full crud functionality
-	-	Add
-	-	Delete
-	-	Create
-	-	Edit
-*	Upload API to heroku
+Zootopia is an application for Zootopia Embassy that helps people who apply to renew their passport to track their passport renewal process.
+### This project consists of three parts:
+1.Zootopia API: 
+This app works as Restful API to store all Zootopia citizens information and provide the embassy with detailed information on every citizen.This API provides.
+*	Basic CRUD (Create, Read, Update and Delete) with postman.
+*	Cross-origin Resource Sharing using by using CORS middleware.
 
-####part 2 : Creating the embassy main app
-This part to be used only by embassy staff member
-##### Section 1
-pulling data from goverment database:
+#### Live demo: https://zootopia-api.herokuapp.com/2.Embassy of Zootopia app:
+This part is for the official use of the embassy staff. The embassy staff can import the applicant information from the government API and store it to the embassy database. they can add the date the application was received and update the status of the application and the date when the status was updated.
+Also this part serve as API for Zootopia citizen APP.  Zootopia citizen AP make axios get Request to this API to get the status of the application.
 
-*  Display all records from gov api
-*  Display one individually on click, inform the user if the applicant is wanted by the govenment.
-*  Copy the required field to embassy databsae and inform the user if the record is already exist
-* 	Search the database using social security number field
-although the API is programmed to full crud funcionality, I did not want the embasy staff to delete or change the user information within the government database . because In my opioion he is suppose to do that.
-
-##### Section 2
-Embassy database:
-
-*  Display the added field
-*  Delete applicant information from embassy databse 
-*  view applicant photo id
-*  add the passport status
-*  the date passport was received 
-*  the date of the change of the status
-*  create limited API that gives the applicant name , socail security number, date the application was recieved passport status and date of last update.
+#### Live demo: https://embassy-of-zootopia.herokuapp.com/
+3.Zootopia citizen APP:
+A customized HTML template for the citizen of Zootopia to check the status of their passport renewal application.Applicants can enter their social security number to check the status of their passport.#### Live demo: https://esraa-alaarag.github.io/zootopia/
 
 
-##### Section 3  : 
-Creating the applicants app
+</a>
 
-*  get suitable free resposive template from internet
-*  custimize the website
-*  allow the user to Enter S.S
-*  check if it's numbers only
-*  search for the user in the embassy database
-*  if the user is found in the database display his information
-*  if the user was not found display a message .
+<a name="userstories">
 
----
-Government database relation table
+## USER STORIES:
 
-![](db-relation.png)
+* 	As an embassy staff, I want to be able to view all the citizens’ information.*	As an embassy staff, I want to be able to search the government database by applicant’s social security number.*	As an embassy staff, I want to see if the applicant is wanted or not.*	As an embassy staff, I want to see a card with individual information about one applicant that contains his/her photo.*	As an embassy staff, I want to import applicant’s information to the embassy local database by clicking on a button on the table.*	As an embassy staff, I want to I want to be able to add the applicant to the embassy local database by clicking on a button on the card*  As an embassy staff, I want to be able to add date of application received, status, date of status and add telephone number.*	As an embassy staff, I want to delete the applicant from the local database.
+*  As an embassy staff, I want to know if the applicant that I’m importing to the local database already exist.*	As an embassy staff, I want to know if importing applicant’s information to the local database was done successfully.
 
-Technologies used/npm Modules
------------
-*  morgan
-*  cors 
-*  pg-promise
-*  axios : for crud functionalty get/patch/put/delete
-*  dotenv
-*  nodemon: to track what happens in the server
-*  postgress
-*  bootstrap
+<a name="wireframesweb"> 
+
+## WIREFRAMES:
+
+### Government database:
+
+![government-database](./img/govdb.png)
+
+### Embassy database: 
+
+![Embassy-database](./img/embasydb.png)
+
+</a>
+
+<a name="pseudocode">
+
+## PSEUDOCODE:
+
+#### Gov page
+*  Display all records from gov API on page load.*  Display any person’s information individually on click as a card (modal)*  Inform the staff member if the applicant is wanted by the government.*  Create add to database function this function can be called directly from the table or from the modal. *  Display alert if importing the information was successful *  Display alert if the person is already existed in the database.*  Add search bar so the applicant can be searcher by Social Security number.
+#### Embassy page
+*  Display all the record existed in the local database.*  Add Delete button so the applicant information can be deleted from the local database. *  Create modal for view applicant photo id*  Edit the table information to add the passport status, the date passport was received and the change of the status.#### USERDB page
+*  Create limited API that returns the applicant name, social security number, date the application was received, passport status and date of last update.</a>
+
+<a name="database"> 
+
+## ERD/VISUAL REPRESENTATION OF DATABASE:
+
+## Embassy_db
+
+![Embassy-database-repres](./img/embassy-db.png)
 
 
-<!--Download Project & Install
-----------------
+</a>
 
-1. [Git clone or download this project]('https://github.com/andres-maza/project-2')
-2. Create a PostgreSQL database called 'zootopia'
-3. On your terminal, run psql -d project_2_db -f migrations/migrations.sql
-4. If you haven't already, install nodemon package (npm install -g nodemon)
-5. Run nodemon, app should be available on localhost:3000-->
+<a name="technologies"> 
+
+## TECHNOLOGIES USED:
+
+### Core Stack:
+
+- Node.js
+- Express
+- HTML
+- CSS
+- JavaScript
+- jQuery
+- Heroku
+- Github
+
+### Middleware:
+
+- Axios
+- bootstrap
+- cors
+- bluebird
+- Postgresql
+- pg-promise
+- dotenv
+- morgan
+- nodeman
+
+### Also
+
+- Trello 
+- Postman (API and DB testing)
+- Postico
+
+</a>
+
+<a name="project">
+
+## SEE THE PROJECT:
+
+### Live Deployment of App: 
+
+https://embassy-of-zootopia.herokuapp.com/
+
+
+
+![app-logo](./img/logo.png)
+
+</a>
+
+[Go Back to the Table of Content](#goback)
